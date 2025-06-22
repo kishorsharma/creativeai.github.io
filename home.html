@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreativAI - Your Ultimate AI Content Creation Hub</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A; /* Near black */
+            color: #E5E7EB; /* Light gray */
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #38BDF8, #A78BFA, #F472B6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-bg {
+            background-image: radial-gradient(circle at top right, rgba(167, 139, 250, 0.15), transparent 40%), 
+                              radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.15), transparent 40%);
+        }
+        .feature-card {
+            background: rgba(31, 41, 55, 0.3); /* semi-transparent gray */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(167, 139, 250, 0.5);
+            box-shadow: 0 10px 25px -5px rgba(167, 139, 250, 0.1);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #38BDF8, #A78BFA);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.5);
+        }
+
+        /* --- New Animation Styles --- */
+        @keyframes fadeIn-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-up {
+            animation: fadeIn-up 0.8s ease-out forwards;
+        }
+        .hero-h1 { animation-delay: 0.2s; opacity: 0; }
+        .hero-p { animation-delay: 0.4s; opacity: 0; }
+        .hero-cta { animation-delay: 0.6s; opacity: 0; }
+        
+        /* --- New Gallery Styles --- */
+        .gallery-grid {
+            columns: 2;
+        }
+        @media (min-width: 768px) {
+            .gallery-grid { columns: 3; }
+        }
+        @media (min-width: 1024px) {
+            .gallery-grid { columns: 4; }
+        }
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem; /* rounded-xl */
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 1.5rem 1rem 1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            font-size: 0.875rem; /* text-sm */
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text">CreativAI</a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#features" class="hover:text-violet-400 transition-colors">Features</a>
+                <a href="#gallery" class="hover:text-violet-400 transition-colors">Gallery</a>
+                <a href="#use-cases" class="hover:text-violet-400 transition-colors">Use Cases</a>
+                <a href="#pricing" class="hover:text-violet-400 transition-colors">Pricing</a>
+                <a href="#faq" class="hover:text-violet-400 transition-colors">FAQ</a>
+            </nav>
+            <a href="#" class="hidden md:inline-block px-5 py-2 rounded-lg text-white font-semibold border border-violet-400 hover:bg-violet-400/10 transition-colors">Sign In</a>
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+             <a href="#features" class="block py-2 hover:text-violet-400 transition-colors">Features</a>
+             <a href="#gallery" class="block py-2 hover:text-violet-400 transition-colors">Gallery</a>
+             <a href="#use-cases" class="block py-2 hover:text-violet-400 transition-colors">Use Cases</a>
+             <a href="#pricing" class="block py-2 hover:text-violet-400 transition-colors">Pricing</a>
+             <a href="#faq" class="block py-2 hover:text-violet-400 transition-colors">FAQ</a>
+             <a href="#" class="block mt-2 px-5 py-2 rounded-lg text-center text-white font-semibold border border-violet-400 hover:bg-violet-400/10 transition-colors">Sign In</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center text-center hero-bg pt-24 pb-12">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-4 animate-fade-in-up hero-h1">
+                    Unleash Your <span class="gradient-text">Infinite Creativity</span> with AI
+                </h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-300 mb-8 animate-fade-in-up hero-p">
+                    Generate exceptional text and stunning images in seconds. From viral blog posts to professional headshots, our AI is your ultimate content creation partner.
+                </p>
+                <div class="animate-fade-in-up hero-cta">
+                    <a href="#" class="btn-primary inline-block text-white font-bold text-lg px-8 py-4 rounded-lg">
+                        Get Started for Free
+                    </a>
+                    <p class="text-sm mt-4 text-gray-400">No credit card required.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20">
+            <div class="container mx-auto px-6">
+                <!-- Text Generation Features -->
+                <div class="mb-16 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Transform Your Ideas into <span class="gradient-text">Words</span></h2>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto">Effortlessly craft compelling content for any purpose.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Cards are the same as before -->
+                     <div class="feature-card p-6 rounded-xl text-center"><div class="flex justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></div><h3 class="text-xl font-bold mb-2">AI Stories</h3><p class="text-gray-400">Generate captivating narratives and short stories in any genre.</p></div>
+                    <div class="feature-card p-6 rounded-xl text-center"><div class="flex justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg></div><h3 class="text-xl font-bold mb-2">Blog & Articles</h3><p class="text-gray-400">Create SEO-optimized, engaging blog posts and articles in minutes.</p></div>
+                    <div class="feature-card p-6 rounded-xl text-center"><div class="flex justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h3 class="text-xl font-bold mb-2">Summarization</h3><p class="text-gray-400">Condense long documents and articles into concise summaries.</p></div>
+                    <div class="feature-card p-6 rounded-xl text-center"><div class="flex justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div><h3 class="text-xl font-bold mb-2">Social Media</h3><p class="text-gray-400">Generate catchy captions, tweets, and posts for all platforms.</p></div>
+                </div>
+
+                <!-- Image Generation Features -->
+                <div class="mt-24 mb-16 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Bring Your Vision to <span class="gradient-text">Life</span></h2>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto">Create breathtaking images and art with simple text prompts.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Cards are the same as before -->
+                    <div class="feature-card p-6 rounded-xl text-center"><div class="flex justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-400"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></div><h3 class="text-xl font-bold mb-2">Realistic Images</h3><p class="text-gray-400">Generate photorealistic images for portfolios, products, and more.</p></div>
+                    <div class="feature-card p-6 rounded-xl text-center"><div class="flex justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-400"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.83-.13 2.69-.37"/><path d="M14 10c-1.31 0-2.5.54-3.32 1.44a5.5 5.5 0 0 0-1.6 3.87"/><path d="M19.03 7.39A6.5 6.5 0 0 0 12 5a6.5 6.5 0 0 0-7 6.5c0 1.58.56 3.04 1.5 4.24"/><path d="M12 12h.01"/><path d="m16 16.5 4-4"/><path d="M20 16.5 16 12"/></svg></div><h3 class="text-xl font-bold mb-2">Anime & Art</h3><p class="text-gray-400">Create unique characters and artistic styles, from anime to fantasy.</p></div>
+                    <div class="feature-card p-6 rounded-xl text-center"><div class="flex justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-400"><path d="M12.22 19.88a2.89 2.89 0 0 0 4.12 0l1.38-1.38a2.89 2.89 0 0 0 0-4.12l-7.38-7.38a2.89 2.89 0 0 0-4.12 0L4.84 8.38a2.89 2.89 0 0 0 0 4.12l7.38 7.38z"/><path d="m5.15 9.15.71-.71"/><path d="m12 12 1-1"/><path d="m18.85 5.15-.71.71"/><path d="m15 15-1 1"/><path d="m20.27 7.73-1-1"/><path d="m3.73 16.27 1 1"/></svg></div><h3 class="text-xl font-bold mb-2">BG Remover</h3><p class="text-gray-400">Instantly remove backgrounds from any image with one click.</p></div>
+                    <div class="feature-card p-6 rounded-xl text-center"><div class="flex justify-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-400"><path d="m21 21-6-6m6 6v-4.5m0 4.5h-4.5"/><path d="M3 11.5a8.5 8.5 0 1 1 14.28 5.13"/><path d="M3 3v4.5h4.5"/></svg></div><h3 class="text-xl font-bold mb-2">Image Upscaler</h3><p class="text-gray-400">Enhance image resolution and quality up to 4x without losing detail.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Gallery Showcase Section -->
+        <section id="gallery" class="py-20 bg-gray-900/50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Explore a World of <span class="gradient-text">AI-Generated Art</span></h2>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto">See what's possible with the power of CreativAI.</p>
+                </div>
+                <div class="gallery-grid gap-4">
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/500x700/0A0A0A/FFF?text=Sci-Fi+City" alt="AI Generated Sci-Fi Cityscape" onerror="this.onerror=null;this.src='https://placehold.co/500x700';">
+                        <div class="gallery-overlay">A hyper-detailed sci-fi city at night, neon lights</div>
+                    </div>
+                     <div class="gallery-item">
+                        <img src="https://placehold.co/500x500/0A0A0A/FFF?text=Anime+Character" alt="AI Generated Anime Character" onerror="this.onerror=null;this.src='https://placehold.co/500x500';">
+                        <div class="gallery-overlay">Anime character with silver hair, studio ghibli style</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/500x800/0A0A0A/FFF?text=Realistic+Portrait" alt="AI Generated Realistic Portrait" onerror="this.onerror=null;this.src='https://placehold.co/500x800';">
+                        <div class="gallery-overlay">Photorealistic portrait of a smiling woman, 85mm lens</div>
+                    </div>
+                     <div class="gallery-item">
+                        <img src="https://placehold.co/500x600/0A0A0A/FFF?text=Fantasy+Landscape" alt="AI Generated Fantasy Landscape" onerror="this.onerror=null;this.src='https://placehold.co/500x600';">
+                        <div class="gallery-overlay">Epic fantasy landscape with floating islands and waterfalls</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/500x500/0A0A0A/FFF?text=Abstract+Art" alt="AI Generated Abstract Art" onerror="this.onerror=null;this.src='https://placehold.co/500x500';">
+                        <div class="gallery-overlay">Abstract explosion of colors, fluid dynamics</div>
+                    </div>
+                     <div class="gallery-item">
+                        <img src="https://placehold.co/500x750/0A0A0A/FFF?text=Product+Shot" alt="AI Generated Product Shot" onerror="this.onerror=null;this.src='https://placehold.co/500x750';">
+                        <div class="gallery-overlay">Luxury watch on a marble surface, studio lighting</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://placehold.co/500x650/0A0A0A/FFF?text=Cyberpunk+Cat" alt="AI Generated Cyberpunk Cat" onerror="this.onerror=null;this.src='https://placehold.co/500x650';">
+                        <div class="gallery-overlay">A cat with robotic implants, cyberpunk aesthetic</div>
+                    </div>
+                     <div class="gallery-item">
+                        <img src="https://placehold.co/500x400/0A0A0A/FFF?text=Surreal+Nature" alt="AI Generated Surreal Nature" onerror="this.onerror=null;this.src='https://placehold.co/500x400';">
+                        <div class="gallery-overlay">A forest with glowing mushrooms, surreal and magical</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Use Cases Section -->
+        <section id="use-cases" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">For <span class="gradient-text">Everyone</span>, Everywhere</h2>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto">CreativAI empowers professionals and hobbyists alike.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="feature-card p-8 rounded-xl">
+                        <p class="text-lg mb-4">"This tool has revolutionized our content marketing. We're producing high-quality blog posts in a fraction of the time. A total game-changer!"</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/40x40/a78bfa/ffffff?text=M" alt="Marketer" class="w-10 h-10 rounded-full mr-4">
+                            <div>
+                                <p class="font-bold">Sarah L.</p>
+                                <p class="text-sm text-gray-400">Content Marketer</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="feature-card p-8 rounded-xl">
+                        <p class="text-lg mb-4">"As a concept artist, generating visual ideas quickly is crucial. CreativAI helps me explore styles and compositions I'd never have thought of on my own."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/40x40/f472b6/ffffff?text=A" alt="Artist" class="w-10 h-10 rounded-full mr-4">
+                            <div>
+                                <p class="font-bold">Kenji T.</p>
+                                <p class="text-sm text-gray-400">Digital Artist</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="feature-card p-8 rounded-xl">
+                        <p class="text-lg mb-4">"I was struggling with writer's block for my novel. The AI story generator gave me the spark I needed to get back on track. Incredibly helpful."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/40x40/38bdf8/ffffff?text=W" alt="Writer" class="w-10 h-10 rounded-full mr-4">
+                            <div>
+                                <p class="font-bold">Maria G.</p>
+                                <p class="text-sm text-gray-400">Author</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-20 bg-gray-900/50">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Simple, Transparent <span class="gradient-text">Pricing</span></h2>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto">Choose the plan that's right for you. Cancel anytime.</p>
+                </div>
+                <div class="flex flex-col lg:flex-row justify-center items-center gap-8">
+                    <!-- Free Plan -->
+                    <div class="feature-card p-8 rounded-xl w-full max-w-sm">
+                        <h3 class="text-2xl font-bold text-center mb-2">Free</h3>
+                        <p class="text-center text-gray-400 mb-6">Perfect for getting started</p>
+                        <p class="text-4xl font-extrabold text-center mb-6">$0<span class="text-lg font-medium text-gray-400">/mo</span></p>
+                        <a href="#" class="w-full text-center block bg-gray-600/50 text-white font-semibold py-3 rounded-lg hover:bg-gray-500/50 transition-colors">Get Started</a>
+                        <ul class="mt-8 space-y-4 text-gray-300">
+                           <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg> 10,000 Text Credits/mo</li>
+                           <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg> 20 Image Credits/mo</li>
+                           <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg> Standard Quality</li>
+                           <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500 mr-3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Background Remover</li>
+                           <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500 mr-3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Image Upscaler</li>
+                        </ul>
+                    </div>
+                    <!-- Pro Plan -->
+                    <div class="relative feature-card p-8 rounded-xl w-full max-w-sm border-2 border-violet-400">
+                        <p class="absolute top-0 -translate-y-1/2 bg-violet-400 text-white text-sm font-bold px-3 py-1 rounded-full">MOST POPULAR</p>
+                        <h3 class="text-2xl font-bold text-center mb-2">Pro</h3>
+                        <p class="text-center text-gray-400 mb-6">For professionals & creators</p>
+                        <p class="text-4xl font-extrabold text-center mb-6">$19<span class="text-lg font-medium text-gray-400">/mo</span></p>
+                        <a href="#" class="btn-primary w-full text-center block text-white font-semibold py-3 rounded-lg">Choose Pro</a>
+                        <ul class="mt-8 space-y-4 text-gray-300">
+                           <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg> 150,000 Text Credits/mo</li>
+                           <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg> 500 Image Credits/mo</li>
+                           <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg> High Quality & 4K</li>
+                           <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg> Background Remover</li>
+                           <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg> Image Upscaler</li>
+                           <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 mr-3"><polyline points="20 6 9 17 4 12"></polyline></svg> Priority Support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20">
+            <div class="container mx-auto px-6 max-w-3xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked <span class="gradient-text">Questions</span></h2>
+                </div>
+                <div class="space-y-4" x-data="{ open: 0 }">
+                    <!-- FAQ Item 1 -->
+                    <div class="border border-gray-700 rounded-lg">
+                        <button @click="open = (open === 1 ? 0 : 1)" class="w-full text-left p-4 flex justify-between items-center">
+                            <span class="font-semibold text-lg">Is the generated content unique?</span>
+                            <span x-show="open !== 1" class="text-violet-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
+                            <span x-show="open === 1" class="text-violet-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
+                        </button>
+                        <div x-show="open === 1" x-collapse class="p-4 pt-0 text-gray-400">
+                            Yes, our AI models generate content from scratch based on your prompts. While there's a theoretical possibility of similarity with existing content, the outputs are overwhelmingly unique and pass plagiarism checks.
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                     <div class="border border-gray-700 rounded-lg">
+                        <button @click="open = (open === 2 ? 0 : 2)" class="w-full text-left p-4 flex justify-between items-center">
+                            <span class="font-semibold text-lg">What are the usage rights for generated images?</span>
+                            <span x-show="open !== 2" class="text-violet-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
+                            <span x-show="open === 2" class="text-violet-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
+                        </button>
+                        <div x-show="open === 2" x-collapse class="p-4 pt-0 text-gray-400">
+                           With our paid plans, you get full commercial rights to use the images you generate, meaning you can use them for marketing, products, and any other commercial purpose without attribution. Free plan users have a more restrictive, non-commercial license. Please see our terms for details.
+                        </div>
+                    </div>
+                     <!-- FAQ Item 3 -->
+                     <div class="border border-gray-700 rounded-lg">
+                        <button @click="open = (open === 3 ? 0 : 3)" class="w-full text-left p-4 flex justify-between items-center">
+                            <span class="font-semibold text-lg">How do credits work?</span>
+                             <span x-show="open !== 3" class="text-violet-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
+                            <span x-show="open === 3" class="text-violet-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
+                        </button>
+                        <div x-show="open === 3" x-collapse class="p-4 pt-0 text-gray-400">
+                           Credits are used for generating content. For example, generating one standard image might cost 1 image credit, while an upscaled 4K image might cost 4 credits. Text generation is based on the number of words generated. Your credits reset every month according to your plan.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="py-20 text-center">
+             <div class="container mx-auto px-6">
+                <h2 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
+                    Ready to <span class="gradient-text">Create?</span>
+                </h2>
+                <p class="text-lg md:text-xl max-w-2xl mx-auto text-gray-300 mb-8">
+                   Join thousands of creators and start building your best content today.
+                </p>
+                <a href="#" class="btn-primary inline-block text-white font-bold text-lg px-8 py-4 rounded-lg">
+                    Sign Up Now - It's Free
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900/50 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <a href="#" class="text-2xl font-bold gradient-text mb-4 md:mb-0">CreativAI</a>
+                <div class="flex space-x-6 text-gray-400">
+                    <a href="#" class="hover:text-white">About</a>
+                    <a href="#" class="hover:text-white">Terms</a>
+                    <a href="#" class="hover:text-white">Privacy</a>
+                    <a href="#" class="hover:text-white">Contact</a>
+                </div>
+            </div>
+            <p class="text-center text-gray-500 mt-8">&copy; 2025 CreativAI. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- Alpine.js for interactivity -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+</body>
+</html>
