@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Generation - CreativeAI</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js for interactivity -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A;
+            color: #E5E7EB;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #38BDF8, #A78BFA, #F472B6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .app-bg {
+            background-color: #111827; /* gray-900 */
+        }
+        .sidebar {
+            background-color: #1F2937; /* gray-800 */
+        }
+        .form-input, .form-select, .form-textarea {
+            background-color: #374151; /* gray-700 */
+            border: 1px solid #4B5563; /* gray-600 */
+            color: #E5E7EB;
+            transition: border-color 0.3s ease;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #A78BFA; /* violet-400 */
+            box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.3);
+        }
+        .generate-button {
+            background: linear-gradient(90deg, #38BDF8, #A78BFA);
+            transition: all 0.3s ease;
+        }
+        .generate-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.5);
+        }
+        .nav-button {
+            background-color: transparent;
+            border: 1px solid transparent;
+            transition: all 0.2s ease-in-out;
+        }
+        .nav-button:hover {
+            background-color: #374151; /* gray-700 */
+        }
+        .nav-button.active {
+            background-color: #4B5563; /* gray-600 */
+            border-color: #A78BFA;
+            color: white;
+            font-weight: 600;
+        }
+        .output-gallery .image-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+        .output-gallery .image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0.75rem;
+        }
+        .output-gallery .image-card:hover .image-overlay {
+            opacity: 1;
+        }
+        .aspect-ratio-btn {
+            background-color: #374151;
+            border: 1px solid #4B5563;
+        }
+        .aspect-ratio-btn.active {
+            background-color: #A78BFA;
+            border-color: #A78BFA;
+            color: white;
+        }
+        /* For Alpine.js transition */
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="antialiased" x-data="{ currentStyle: 'photorealistic' }">
+
+    <div class="flex h-screen app-bg">
+        <!-- Sidebar -->
+        <aside class="w-1/4 lg:w-1/5 h-full sidebar p-6 flex flex-col flex-shrink-0">
+            <a href="index.html" class="text-2xl font-bold gradient-text mb-8">CreativAI</a>
+            
+            <!-- Main Navigation -->
+            <div class="space-y-2 mb-8">
+                 <h3 class="text-xs uppercase text-gray-400 font-semibold mb-4">Menu</h3>
+                <a href="text-generation.html" class="nav-button w-full text-left flex items-center p-3 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                    Text Generation
+                </a>
+                <a href="#" class="nav-button active w-full text-left flex items-center p-3 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                    Image Generation
+                </a>
+                 <a href="#" class="nav-button w-full text-left flex items-center p-3 rounded-lg text-gray-500 cursor-not-allowed">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                    Video (Coming Soon)
+                </a>
+            </div>
+            
+            <div class="mt-auto">
+                <div class="text-sm">
+                    <p class="text-gray-400">Image Credits</p>
+                    <p class="text-lg font-bold">485 / 500</p>
+                </div>
+                <div class="mt-4 border-t border-gray-700 pt-4 flex items-center space-x-3">
+                     <img src="https://placehold.co/40x40/A78BFA/ffffff?text=U" alt="User Avatar" class="w-10 h-10 rounded-full">
+                     <div>
+                         <p class="font-semibold">User Name</p>
+                         <a href="#" class="text-xs text-red-400 hover:underline">Log Out</a>
+                     </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="w-3/4 lg:w-4/5 h-full overflow-y-auto">
+            <div class="p-8">
+                <!-- Template-based Header -->
+                <div x-show="currentStyle === 'photorealistic'" x-cloak>
+                    <h1 class="text-3xl font-bold mb-2">Create Photorealistic Images</h1>
+                    <p class="text-gray-400">Generate stunningly realistic images from a text description.</p>
+                </div>
+                <div x-show="currentStyle === 'anime'" x-cloak>
+                    <h1 class="text-3xl font-bold mb-2">Create Anime & Manga Art</h1>
+                    <p class="text-gray-400">Bring your own anime characters and scenes to life.</p>
+                </div>
+                 <div x-show="currentStyle === 'fantasy'" x-cloak>
+                    <h1 class="text-3xl font-bold mb-2">Create Fantasy Art</h1>
+                    <p class="text-gray-400">Generate epic fantasy landscapes, characters, and creatures.</p>
+                </div>
+                <div x-show="currentStyle === '3d'" x-cloak>
+                    <h1 class="text-3xl font-bold mb-2">Create 3D Renders</h1>
+                    <p class="text-gray-400">Design and render 3D objects and scenes with ease.</p>
+                </div>
+                
+                <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Input Form -->
+                    <div class="lg:col-span-1" x-data="{ aspectRatio: '1:1' }">
+                        <form>
+                             <div class="space-y-6">
+                                <div>
+                                    <label for="prompt" class="block text-sm font-medium text-gray-300 mb-2">Prompt</label>
+                                    <textarea name="prompt" id="prompt" rows="6" required class="form-textarea w-full px-4 py-3 rounded-lg" placeholder="e.g., A cinematic shot of a futuristic neon-lit Tokyo street at night, rain-slicked pavement, detailed reflections, high resolution"></textarea>
+                                </div>
+                                <div>
+                                    <label for="negative_prompt" class="block text-sm font-medium text-gray-300 mb-2">Negative Prompt (what to avoid)</label>
+                                    <textarea name="negative_prompt" id="negative_prompt" rows="3" class="form-textarea w-full px-4 py-3 rounded-lg" placeholder="e.g., blurry, low quality, cartoon, text, watermark"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-300 mb-2">Aspect Ratio</label>
+                                    <div class="flex space-x-2">
+                                        <button type="button" @click="aspectRatio = '1:1'" :class="{'active': aspectRatio === '1:1'}" class="aspect-ratio-btn flex-1 p-2 rounded-lg">Square (1:1)</button>
+                                        <button type="button" @click="aspectRatio = '2:3'" :class="{'active': aspectRatio === '2:3'}" class="aspect-ratio-btn flex-1 p-2 rounded-lg">Portrait (2:3)</button>
+                                        <button type="button" @click="aspectRatio = '16:9'" :class="{'active': aspectRatio === '16:9'}" class="aspect-ratio-btn flex-1 p-2 rounded-lg">Landscape (16:9)</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="style" class="block text-sm font-medium text-gray-300 mb-2">Image Style</label>
+                                    <select x-model="currentStyle" name="style" id="style" class="form-select w-full px-4 py-3 rounded-lg">
+                                        <option value="photorealistic">Photorealistic</option>
+                                        <option value="anime">Anime & Manga</option>
+                                        <option value="fantasy">Fantasy Art</option>
+                                        <option value="3d">3D Render</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="num_images" class="block text-sm font-medium text-gray-300 mb-2">Number of Images</label>
+                                     <select id="num_images" name="num_images" class="form-select w-full px-4 py-3 rounded-lg">
+                                         <option>1</option>
+                                         <option selected>2</option>
+                                         <option>3</option>
+                                         <option>4</option>
+                                     </select>
+                                </div>
+                                 <button type="button" class="generate-button w-full flex items-center justify-center text-white font-bold text-lg px-8 py-3 rounded-lg">
+                                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                      </svg>
+                                    Generate (2 Credits)
+                                </button>
+                             </div>
+                        </form>
+                    </div>
+
+                    <!-- Output Gallery -->
+                    <div class="lg:col-span-2">
+                        <div class="output-gallery grid grid-cols-2 gap-4">
+                            <!-- Placeholder images -->
+                            <div class="image-card">
+                                <img src="https://placehold.co/500x500/111827/FFF?text=Result+1" alt="Generated Image 1" class="w-full h-full object-cover">
+                                <div class="image-overlay">
+                                    <div class="flex justify-end space-x-2">
+                                        <button class="bg-black/50 p-2 rounded-full text-white hover:bg-violet-500 transition-colors" title="Upscale"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></button>
+                                        <button class="bg-black/50 p-2 rounded-full text-white hover:bg-violet-500 transition-colors" title="Download"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" /></svg></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="image-card">
+                                <img src="https://placehold.co/500x500/111827/FFF?text=Result+2" alt="Generated Image 2" class="w-full h-full object-cover">
+                                 <div class="image-overlay">
+                                    <div class="flex justify-end space-x-2">
+                                        <button class="bg-black/50 p-2 rounded-full text-white hover:bg-violet-500 transition-colors" title="Upscale"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></button>
+                                        <button class="bg-black/50 p-2 rounded-full text-white hover:bg-violet-500 transition-colors" title="Download"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" /></svg></button>
+                                    </div>
+                                </div>
+                            </div>
+                             <!-- Add more placeholders if needed -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
