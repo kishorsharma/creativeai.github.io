@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - CreativeAI</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A; /* Near black */
+            color: #E5E7EB; /* Light gray */
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #38BDF8, #A78BFA, #F472B6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-bg-contact {
+            background-image: radial-gradient(circle at top left, rgba(167, 139, 250, 0.1), transparent 50%), 
+                              radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.1), transparent 50%);
+        }
+        .contact-form-container {
+            background: rgba(31, 41, 55, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .form-input {
+            background-color: rgba(17, 24, 39, 0.8);
+            border: 1px solid #4B5563; /* gray-600 */
+            color: #E5E7EB;
+            transition: border-color 0.3s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #A78BFA; /* violet-400 */
+            box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.3);
+        }
+        .submit-button {
+            background: linear-gradient(90deg, #38BDF8, #A78BFA);
+            transition: all 0.3s ease;
+        }
+        .submit-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.5);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="sticky top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="home.html" class="text-2xl font-bold gradient-text">CreativAI</a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="home.html#features" class="hover:text-violet-400 transition-colors">Features</a>
+                <a href="about.html" class="hover:text-violet-400 transition-colors">About Us</a>
+                <a href="home.html#pricing" class="hover:text-violet-400 transition-colors">Pricing</a>
+                <a href="faq.html" class="hover:text-violet-400 transition-colors">FAQ</a>
+                 <a href="#" class="text-white font-semibold transition-colors">Contact</a>
+            </nav>
+            <a href="#" class="hidden md:inline-block px-5 py-2 rounded-lg text-white font-semibold border border-violet-400 hover:bg-violet-400/10 transition-colors">Sign In</a>
+            <!-- Mobile menu can be added here if needed -->
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="text-center pt-24 pb-16 hero-bg-contact">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">Get In <span class="gradient-text">Touch</span></h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-300">
+                    We're here to help and answer any question you might have. We look forward to hearing from you.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-12">
+                    
+                    <!-- Contact Form -->
+                    <div class="contact-form-container p-8 rounded-xl">
+                        <h2 class="text-2xl font-bold mb-6">Send us a Message</h2>
+                        <form action="#" method="POST">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
+                                    <input type="text" name="name" id="name" required class="form-input w-full px-4 py-3 rounded-lg" placeholder="John Doe">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                                    <input type="email" name="email" id="email" required class="form-input w-full px-4 py-3 rounded-lg" placeholder="john.doe@example.com">
+                                </div>
+                            </div>
+                             <div class="mb-6">
+                                <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
+                                <input type="text" name="subject" id="subject" required class="form-input w-full px-4 py-3 rounded-lg" placeholder="Question about pricing">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Your Message</label>
+                                <textarea name="message" id="message" rows="5" required class="form-input w-full px-4 py-3 rounded-lg" placeholder="Hi there, I'd like to ask..."></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="submit-button w-full text-white font-bold text-lg px-8 py-3 rounded-lg">
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="space-y-12">
+                        <div>
+                            <h2 class="text-2xl font-bold mb-4">Contact Information</h2>
+                            <p class="text-gray-400 mb-6">Reach out to us directly through the appropriate channel below.</p>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-4">
+                                    <div class="bg-violet-500/10 p-3 rounded-full">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-lg">General Inquiries</h3>
+                                        <p class="text-gray-400">For general questions about our platform.</p>
+                                        <a href="mailto:hello@creativeai.app" class="text-violet-400 hover:underline">hello@creativeai.app</a>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-4">
+                                     <div class="bg-sky-500/10 p-3 rounded-full">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-lg">Support</h3>
+                                        <p class="text-gray-400">For technical assistance or billing questions.</p>
+                                        <a href="mailto:support@creativeai.app" class="text-sky-400 hover:underline">support@creativeai.app</a>
+                                    </div>
+                                </div>
+                                 <div class="flex items-start space-x-4">
+                                     <div class="bg-pink-500/10 p-3 rounded-full">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3h2m-4 3H9m-4 3h2m-4 3h2m-4 3h2" /></svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-lg">Press & Media</h3>
+                                        <p class="text-gray-400">For press inquiries and media requests.</p>
+                                        <a href="mailto:press@creativeai.app" class="text-pink-400 hover:underline">press@creativeai.app</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                             <h2 class="text-2xl font-bold mb-4">Follow Us</h2>
+                             <p class="text-gray-400 mb-6">Stay up-to-date with our latest news and announcements.</p>
+                             <div class="flex space-x-4">
+                                 <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="LinkedIn">
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                 </a>
+                                  <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="Twitter">
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-.139 9.237c.209 4.617-3.234 9.765-9.33 9.765-1.854 0-3.579-.543-5.032-1.475 1.742.205 3.48-.278 4.86-1.359-1.437-.027-2.649-.976-3.066-2.28.51.098.998.063 1.46-.056-1.522-.308-2.672-1.651-2.672-3.252 0-.014 0-.028 0-.041.446.248.949.398 1.48.411-1.461-.977-2.434-2.651-2.434-4.579 0-.994.269-1.921.734-2.734 1.564 1.915 3.902 3.168 6.479 3.287-.063-.243-.095-.5-.095-.765 0-1.844 1.492-3.333 3.333-3.333.959 0 1.825.406 2.434 1.054.761-.148 1.482-.426 2.126-.811-.25 1.157-.866 2.135-1.638 2.544.676-.081 1.321-.261 1.905-.518-.45.666-1.001 1.265-1.638 1.732z"/></svg>
+                                 </a>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900/50 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <a href="home.html" class="text-2xl font-bold gradient-text mb-4 md:mb-0">CreativeAI</a>
+                <div class="flex space-x-6 text-gray-400">
+                    <a href="about.html" class="hover:text-white">About</a>
+                    <a href="#" class="hover:text-white">Terms</a>
+                    <a href="#" class="hover:text-white">Privacy</a>
+                    <a href="#" class="text-white font-semibold">Contact</a>
+                </div>
+            </div>
+            <p class="text-center text-gray-500 mt-8">&copy; 2025 CreativeAI. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

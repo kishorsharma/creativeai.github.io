@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - CreativeAI</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Alpine.js for interactivity -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A; /* Near black */
+            color: #E5E7EB; /* Light gray */
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #38BDF8, #A78BFA, #F472B6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-bg-faq {
+            background-image: radial-gradient(circle at top right, rgba(167, 139, 250, 0.1), transparent 50%), 
+                              radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.1), transparent 50%);
+        }
+        .faq-item {
+            background: rgba(31, 41, 55, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        .faq-item:hover {
+            background: rgba(31, 41, 55, 0.4);
+        }
+        .cta-button {
+            background: linear-gradient(90deg, #38BDF8, #A78BFA);
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.5);
+        }
+        /* For Alpine.js transition */
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="sticky top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold gradient-text">CreativAI</a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="index.html#features" class="hover:text-violet-400 transition-colors">Features</a>
+                <a href="about.html" class="hover:text-violet-400 transition-colors">About Us</a>
+                <a href="index.html#pricing" class="hover:text-violet-400 transition-colors">Pricing</a>
+                <a href="#" class="text-white font-semibold transition-colors">FAQ</a>
+            </nav>
+            <a href="#" class="hidden md:inline-block px-5 py-2 rounded-lg text-white font-semibold border border-violet-400 hover:bg-violet-400/10 transition-colors">Sign In</a>
+            <!-- Mobile menu can be added here if needed -->
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="text-center pt-24 pb-16 hero-bg-faq">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">Frequently Asked <span class="gradient-text">Questions</span></h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-300">
+                    Have questions? We have answers. If you can't find what you're looking for, feel free to contact us.
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-6 max-w-4xl">
+                
+                <div x-data="{ open: null }">
+                    <!-- General Questions -->
+                    <h2 class="text-2xl font-bold gradient-text mb-6">General</h2>
+                    <div class="space-y-4 mb-12">
+                        <!-- Question 1 -->
+                        <div class="faq-item rounded-lg">
+                            <button @click="open = (open === 1 ? null : 1)" class="w-full text-left p-6 flex justify-between items-center">
+                                <span class="font-semibold text-lg">What is CreativeAI?</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform" :class="{ 'rotate-180': open === 1 }" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                            </button>
+                            <div x-show="open === 1" x-collapse x-cloak class="p-6 pt-0 text-gray-400">
+                                <p>CreativeAI is an all-in-one generative AI platform designed to help creators, marketers, and businesses produce high-quality content at incredible speed. We offer a suite of tools for AI text generation (like blogs and articles) and AI image generation (like realistic photos and digital art), with much more to come.</p>
+                            </div>
+                        </div>
+                        <!-- Question 2 -->
+                        <div class="faq-item rounded-lg">
+                            <button @click="open = (open === 2 ? null : 2)" class="w-full text-left p-6 flex justify-between items-center">
+                                <span class="font-semibold text-lg">Who is CreativeAI for?</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform" :class="{ 'rotate-180': open === 2 }" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                            </button>
+                            <div x-show="open === 2" x-collapse x-cloak class="p-6 pt-0 text-gray-400">
+                                <p>Our platform is built for a wide range of users, including content marketers, bloggers, social media managers, entrepreneurs, artists, designers, and anyone who needs to create high-quality content quickly and affordably. If you create content, CreativeAI is for you.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Services Questions -->
+                    <h2 class="text-2xl font-bold gradient-text mb-6">Services</h2>
+                    <div class="space-y-4 mb-12">
+                        <!-- Question 3 -->
+                        <div class="faq-item rounded-lg">
+                            <button @click="open = (open === 3 ? null : 3)" class="w-full text-left p-6 flex justify-between items-center">
+                                <span class="font-semibold text-lg">Is the generated text content unique?</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform" :class="{ 'rotate-180': open === 3 }" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                            </button>
+                            <div x-show="open === 3" x-collapse x-cloak class="p-6 pt-0 text-gray-400">
+                                <p>Yes. Our AI models generate content from scratch based on your unique prompts. The outputs are overwhelmingly original and are designed to pass all standard plagiarism checks. You own the content you create.</p>
+                            </div>
+                        </div>
+                         <!-- Question 4 -->
+                        <div class="faq-item rounded-lg">
+                            <button @click="open = (open === 4 ? null : 4)" class="w-full text-left p-6 flex justify-between items-center">
+                                <span class="font-semibold text-lg">What are the usage rights for the images I create?</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform" :class="{ 'rotate-180': open === 4 }" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                            </button>
+                            <div x-show="open === 4" x-collapse x-cloak class="p-6 pt-0 text-gray-400">
+                                <p>On any of our paid plans, you receive full commercial rights to use the images you generate. This means you can use them for marketing, merchandise, products, and any other commercial purpose without needing to provide attribution. Please see our terms of service for specific details regarding our Free plan.</p>
+                            </div>
+                        </div>
+                         <!-- Question 5 -->
+                        <div class="faq-item rounded-lg">
+                            <button @click="open = (open === 5 ? null : 5)" class="w-full text-left p-6 flex justify-between items-center">
+                                <span class="font-semibold text-lg">When is AI video generation coming?</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform" :class="{ 'rotate-180': open === 5 }" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                            </button>
+                            <div x-show="open === 5" x-collapse x-cloak class="p-6 pt-0 text-gray-400">
+                                <p>AI video generation is our top development priority! We are hard at work building a powerful and intuitive video creator, including tools specifically for Instagram Reels, Facebook Reels, and YouTube Shorts. We are targeting a beta launch soon. Follow us on our social channels or subscribe to our newsletter for the latest updates!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Account & Billing Questions -->
+                    <h2 class="text-2xl font-bold gradient-text mb-6">Account & Billing</h2>
+                    <div class="space-y-4">
+                        <!-- Question 6 -->
+                        <div class="faq-item rounded-lg">
+                            <button @click="open = (open === 6 ? null : 6)" class="w-full text-left p-6 flex justify-between items-center">
+                                <span class="font-semibold text-lg">How do credits work?</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform" :class="{ 'rotate-180': open === 6 }" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                            </button>
+                            <div x-show="open === 6" x-collapse x-cloak class="p-6 pt-0 text-gray-400">
+                                <p>Credits are used to generate content on the platform. Generating a standard image or a certain number of words consumes credits. The exact amount varies based on the complexity and quality of the generation. Your credits reset every month based on the subscription plan you choose.</p>
+                            </div>
+                        </div>
+                        <!-- Question 7 -->
+                        <div class="faq-item rounded-lg">
+                            <button @click="open = (open === 7 ? null : 7)" class="w-full text-left p-6 flex justify-between items-center">
+                                <span class="font-semibold text-lg">Can I cancel my subscription at any time?</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform" :class="{ 'rotate-180': open === 7 }" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                            </button>
+                            <div x-show="open === 7" x-collapse x-cloak class="p-6 pt-0 text-gray-400">
+                                <p>Yes, absolutely. You can cancel your subscription at any time from your account dashboard. There are no hidden fees or long-term contracts. If you cancel, you will retain access to your plan's features until the end of the current billing cycle.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-4">Still have questions?</h2>
+                <p class="text-lg text-gray-400 max-w-xl mx-auto mb-8">
+                    Our team is here to help. Reach out to us and we'll get back to you as soon as possible.
+                </p>
+                <a href="contact.html" class="cta-button inline-block text-white font-semibold px-8 py-3 rounded-lg">
+                    Contact Support
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900/50 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <a href="index.html" class="text-2xl font-bold gradient-text mb-4 md:mb-0">CreativeAI</a>
+                <div class="flex space-x-6 text-gray-400">
+                    <a href="about.html" class="hover:text-white">About</a>
+                    <a href="#" class="hover:text-white">Terms</a>
+                    <a href="#" class="hover:text-white">Privacy</a>
+                    <a href="contact.html" class="hover:text-white">Contact</a>
+                </div>
+            </div>
+            <p class="text-center text-gray-500 mt-8">&copy; 2025 CreativeAI. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

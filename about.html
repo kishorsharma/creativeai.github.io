@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - CreativeAI</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A; /* Near black */
+            color: #E5E7EB; /* Light gray */
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #38BDF8, #A78BFA, #F472B6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-bg-about {
+            background-image: radial-gradient(circle at 50% 0%, rgba(167, 139, 250, 0.15), transparent 40%);
+        }
+        .feature-card-about {
+            background: rgba(31, 41, 55, 0.3); /* semi-transparent gray */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .feature-card-about:hover {
+            border-color: rgba(167, 139, 250, 0.5);
+        }
+        .cta-button {
+            background: linear-gradient(90deg, #38BDF8, #A78BFA);
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.5);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="sticky top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold gradient-text">CreativAI</a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="index.html#features" class="hover:text-violet-400 transition-colors">Features</a>
+                <a href="#" class="text-white font-semibold transition-colors">About Us</a>
+                <a href="index.html#pricing" class="hover:text-violet-400 transition-colors">Pricing</a>
+                <a href="index.html#faq" class="hover:text-violet-400 transition-colors">FAQ</a>
+            </nav>
+            <a href="#" class="hidden md:inline-block px-5 py-2 rounded-lg text-white font-semibold border border-violet-400 hover:bg-violet-400/10 transition-colors">Sign In</a>
+            <!-- Mobile menu can be added here if needed -->
+        </div>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="text-center pt-24 pb-16 hero-bg-about">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">About <span class="gradient-text">CreativeAI</span></h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-300">
+                    We believe creativity shouldn't have limits. Or deadlines. Or prohibitive costs.
+                </p>
+            </div>
+        </section>
+
+        <!-- Our Story Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-content">
+                        <h2 class="text-3xl font-bold mb-4">Our Story: The Spark Behind the AI</h2>
+                        <p class="text-gray-400 mb-4">
+                            Every creator, marketer, and entrepreneur knows the feeling. You have a brilliant idea—a captivating story, a stunning visual, a game-changing marketing campaign. But between you and that finished product lies a battlefield of familiar obstacles: the blank page, the ticking clock, and a tight budget.
+                        </p>
+                        <p class="text-gray-400">
+                            CreativeAI was born from this challenge. We asked ourselves: What if we could build a toolkit that was not only powerful but also incredibly fast and accessible to everyone? We set out to build not just another AI tool, but a true creative partner.
+                        </p>
+                    </div>
+                    <div class="image-content">
+                        <img src="https://placehold.co/600x400/0A0A0A/A78BFA?text=Idea+to+Reality" alt="Illustration of a lightbulb turning into a gear" class="rounded-xl shadow-lg shadow-violet-500/10 w-full h-auto">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Our Mission Section -->
+        <section class="py-20 bg-gray-900/50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-4">Our Mission</h2>
+                <p class="text-2xl md:text-3xl max-w-4xl mx-auto text-gray-200 leading-relaxed gradient-text font-semibold">
+                    To empower creators of all kinds to bring their visions to life with speed, freedom, and flair.
+                </p>
+            </div>
+        </section>
+
+        <!-- What We've Built Section -->
+        <section id="what-we-built" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Your All-in-One <span class="gradient-text">Creative Hub</span></h2>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto">A comprehensive suite of generative tools to handle every facet of your content needs.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Text Generation Card -->
+                    <div class="feature-card-about p-8 rounded-xl">
+                        <div class="flex items-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400 mr-4"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+                            <h3 class="text-2xl font-bold">For the Wordsmiths</h3>
+                        </div>
+                        <p class="text-gray-400">Go from a simple prompt to polished prose in seconds. Whether you're crafting a narrative or driving conversions, our AI is your co-writer for blogs, ads, stories, and summaries.</p>
+                    </div>
+                    <!-- Image Generation Card -->
+                    <div class="feature-card-about p-8 rounded-xl">
+                        <div class="flex items-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-400 mr-4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                             <h3 class="text-2xl font-bold">For the Visualists</h3>
+                        </div>
+                        <p class="text-gray-400">Transform your words into breathtaking visuals without complex software. Create realistic images, anime art, remove backgrounds, and upscale photos with ease.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The CreativeAI Difference Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">The CreativeAI <span class="gradient-text">Difference</span></h2>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto">In the rapidly growing world of AI, we stand out with two unwavering commitments.</p>
+                </div>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Speed Card -->
+                    <div class="feature-card-about p-8 rounded-xl text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-violet-400 mx-auto mb-4"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        <h3 class="text-2xl font-bold mb-2">Unmatched Speed</h3>
+                        <p class="text-gray-400">We are obsessed with performance. Our platform is built on an optimized infrastructure to deliver high-quality results faster than any other service.</p>
+                    </div>
+                    <!-- Affordability Card -->
+                    <div class="feature-card-about p-8 rounded-xl text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-violet-400 mx-auto mb-4"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        <h3 class="text-2xl font-bold mb-2">Radical Affordability</h3>
+                        <p class="text-gray-400">We believe powerful technology should be accessible. We pass significant cost savings on to you, making our platform the most cost-effective option for creators.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Vision for the Future Section -->
+        <section class="py-20 bg-gray-900/50">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                     <div class="image-content">
+                        <img src="https://placehold.co/600x400/0A0A0A/38BDF8?text=The+Future+is+Video" alt="Illustration of a video play button with motion lines" class="rounded-xl shadow-lg shadow-sky-500/10 w-full h-auto">
+                    </div>
+                    <div class="text-content">
+                        <h2 class="text-3xl font-bold mb-4">Our Vision: The Next Canvas is in Motion</h2>
+                        <p class="text-gray-400 mb-4">
+                           We are not stopping at text and images. Our team is developing our most ambitious feature yet: **AI Video Generation.**
+                        </p>
+                        <p class="text-gray-400">
+                           Soon, you'll be able to create eye-catching, short-form videos for Instagram Reels, Facebook Reels, and YouTube Shorts, completing our vision for a true end-to-end creative solution. Stay tuned!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Join Our Community (CTA) -->
+        <section class="py-20 text-center">
+             <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Join Our Community</h2>
+                <p class="text-lg md:text-xl max-w-2xl mx-auto text-gray-300 mb-8">
+                   We're building the tools we've always wanted, and we invite you to join us on this journey. Let's create something amazing together.
+                </p>
+                <a href="#" class="cta-button inline-block text-white font-bold text-lg px-8 py-4 rounded-lg">
+                    Start Creating for Free
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900/50 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <a href="#" class="text-2xl font-bold gradient-text mb-4 md:mb-0">CreativeAI</a>
+                <div class="flex space-x-6 text-gray-400">
+                    <a href="#" class="hover:text-white">About</a>
+                    <a href="#" class="hover:text-white">Terms</a>
+                    <a href="#" class="hover:text-white">Privacy</a>
+                    <a href="#" class="hover:text-white">Contact</a>
+                </div>
+            </div>
+            <p class="text-center text-gray-500 mt-8">&copy; 2025 CreativeAI. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+
