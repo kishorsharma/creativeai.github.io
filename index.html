@@ -138,12 +138,14 @@
             //    It will look like "entry.123456789".
             const googleFormId = '1FAIpQLSdoD0uGAuW8c_5tAIV7H0jIp7iK_iI_WRdft1U2pU9lmwxhBg'; // <-- REPLACE THIS
             const emailFieldEntry = 'entry.134029806'; // <-- REPLACE THIS
+            const timeFieldEntry = 'entry.342388239';
             
             // This is a placeholder URL. Replace with your actual form ID.
             const googleFormUrl = `https://docs.google.com/forms/d/e/${googleFormId}/formResponse`;
             
             const formData = new FormData();
             formData.append(emailFieldEntry, email);
+            formData.append(timeFieldEntry, new Date());
 
             // Using a CORS proxy for demonstration. For production, use a serverless function.
             fetch(googleFormUrl, {
